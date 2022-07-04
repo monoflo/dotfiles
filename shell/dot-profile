@@ -1,0 +1,10 @@
+export XDG_CONFIG_HOME="$HOME/.config"
+
+alias g="git"
+alias v="nvim"
+alias vim="nvim"
+
+if [[ -f "$HOME/.cargo/env" ]]
+then
+    source "$HOME/.cargo/env"
+fi
