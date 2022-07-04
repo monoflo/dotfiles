@@ -1,7 +1,7 @@
 export XDG_CONFIG_HOME = $(HOME)/.config
 
 DEPENDS :=
-TARGETS := tmux vim
+TARGETS := git tmux vim
 
 FLAGS   := --dotfiles --no-folding -t "$(HOME)"
 
