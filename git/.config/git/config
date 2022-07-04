@@ -1,0 +1,36 @@
+[include]
+    path = private  # private / sensitive config settings
+
+
+[alias]
+    b    = branch
+    bd   = branch --delete
+    c    = commit
+    cb   = checkout --branch
+    co   = checkout
+    cl   = config --list
+    d    = diff
+    dv   = difftool --no-prompt
+    last = log -1 HEAD --stat
+    ps   = push origin HEAD
+    r    = remote --verbose
+    s    = status
+    u    = reset HEAD~1
+
+[core]
+    editor = vim
+
+[fetch]
+    prune = true
+
+[help]
+    autocorrect = 20
+
+[init]
+    defaultBranch = main  # comply with GitHub.com
+
+[status]
+    short = true
+
+[merge]
+    tool = vimdiff
