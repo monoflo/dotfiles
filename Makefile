@@ -1,7 +1,7 @@
 export XDG_CONFIG_HOME = $(HOME)/.config
 
 DEPENDS :=
-FLAGS := --dotfiles -t "$(HOME)"
+FLAGS   := --dotfiles --no-folding -t "$(HOME)"
 
 # OS == MacOS
 ifneq ($(shell uname), Darwin)
