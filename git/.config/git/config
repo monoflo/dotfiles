@@ -3,6 +3,7 @@
 
 
 [alias]
+    a    = add
     b    = branch
     bd   = branch --delete
     c    = commit
@@ -10,6 +11,7 @@
     co   = checkout
     cl   = config --list
     d    = diff
+    dc   = diff --cached
     dv   = difftool --no-prompt
     last = log -1 HEAD --stat
     ps   = push origin HEAD
