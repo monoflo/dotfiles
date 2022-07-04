@@ -31,8 +31,11 @@
 [init]
     defaultBranch = main  # comply with GitHub.com
 
-[status]
-    short = true
-
 [merge]
     tool = vimdiff
+
+[pull]
+    rebase = true
+
+[status]
+    short = true
