@@ -1,6 +1,8 @@
 export XDG_CONFIG_HOME = $(HOME)/.config
 
 DEPENDS :=
+TARGETS := tmux vim
+
 FLAGS   := --dotfiles --no-folding -t "$(HOME)"
 
 # OS == MacOS
@@ -12,10 +14,10 @@ endif
 
 install: $(DEPENDS)
 	@mkdir -p $(XDG_CONFIG_HOME)
-	stow -S $(FLAGS) vim
+	stow -S $(FLAGS) $(TARGETS)
 
 uninstall: $(DEPENDS)
-	stow -D $(FLAGS) vim
+	stow -D $(FLAGS) $(TARGETS)
 
 pkg-homebrew:
 ifeq (, $(shell command -v brew 2> /dev/null))
