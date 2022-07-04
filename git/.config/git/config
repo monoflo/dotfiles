@@ -6,21 +6,35 @@
     a    = add
     b    = branch
     bd   = branch --delete
+    bl   = branch --list
     c    = commit
+    ca   = commit --amend
     cb   = checkout --branch
     co   = checkout
     cl   = config --list
     d    = diff
     dc   = diff --cached
-    dv   = difftool --no-prompt
+    dt   = difftool
+    f    = fetch
+    g    = log --all --decorate --oneline --graph
+    l    = log
     last = log -1 HEAD --stat
-    ps   = push origin HEAD
+    p    = push origin HEAD
+    pl   = pull
+    ps   = push
     r    = remote --verbose
+    ri   = rebase --interactive
     s    = status
     u    = reset HEAD~1
 
 [core]
     editor = vim
+
+[diff]
+    tool = vimdiff
+
+[difftool]
+    prompt = false
 
 [fetch]
     prune = true
