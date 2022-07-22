@@ -2,6 +2,7 @@ src() { [[ -r "$1" ]] && source "$1"; }
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
+alias c="cargo"
 alias g="git"
 alias v="nvim"
 alias vim="nvim"
