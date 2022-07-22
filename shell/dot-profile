@@ -7,4 +7,5 @@ alias g="git"
 alias v="nvim"
 alias vim="nvim"
 
+src "$HOME/.profile-secret"
 src "$HOME/.cargo/env"
