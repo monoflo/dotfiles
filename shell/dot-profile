@@ -1,6 +1,7 @@
 src() { [[ -r "$1" ]] && source "$1"; }
 path() { [[ -d "$1" ]] && export PATH="$PATH:$1"; }
 
+export CARGO_HOME="$HOME/.cargo"
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -10,4 +11,7 @@ alias v="nvim"
 alias vim="nvim"
 
 src "$HOME/.profile-secret"
-src "$HOME/.cargo/env"
+src "$CARGO_HOME/env"
+
+path "$HOME/.local/bin"
+path "$CARGO_HOME/bin"
