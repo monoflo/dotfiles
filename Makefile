@@ -1,30 +1,13 @@
 export XDG_CONFIG_HOME = $(HOME)/.config
 
-DEPENDS :=
 TARGETS := git shell tmux vim
-
 FLAGS   := --dotfiles --no-folding -t "$(HOME)"
 
-# OS == MacOS
-ifneq ($(shell uname), Darwin)
-	DEPENDS += pkg-homebrew pkg-stow
-endif
+.PHONY: install uninstall
 
-.PHONY: install pkg-homebrew pkg-stow
-
-install: $(DEPENDS)
+install:
 	@mkdir -p $(XDG_CONFIG_HOME)
 	stow -S $(FLAGS) $(TARGETS)
 
-uninstall: $(DEPENDS)
+uninstall:
 	stow -D $(FLAGS) $(TARGETS)
-
-pkg-homebrew:
-ifeq (, $(shell command -v brew 2> /dev/null))
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-endif
-
-pkg-stow:
-ifeq (, $(shell command -v stow 2> /dev/null))
-	brew install stow
-endif
