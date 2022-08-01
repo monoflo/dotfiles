@@ -1,19 +1,13 @@
-.PHONY: install uninstall
+.PHONY: install update remove
 export XDG_CONFIG_HOME = $(HOME)/.config
 
-PACKAGE := dotfiles.d
 
-ARGS    := --dotfiles --no-folding -t "$(HOME)"
+install: i-dotfiles i-fzf
 
+update:  u-dotfiles u-fzf
 
-install: i-fzf
-	@mkdir -p $(XDG_CONFIG_HOME)
-	stow -S $(FLAGS) $(PACKAGE)
-
-update: u-fzf
-
-remove: r-fzf
-	stow -D $(FLAGS) $(PACKAGE)
+remove:  r-dotfiles r-fzf
 
 
+include make.d/dotfiles.mk
 include make.d/fzf.mk
