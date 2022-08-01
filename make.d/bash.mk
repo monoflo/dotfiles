@@ -4,7 +4,8 @@ TARGETS := ~/.bash_login ~/.bash_profile
 BACKUP  := bak
 
 i-bash:
-	$(foreach rc, $(TARGETS), $(call [ -f $(rc) ] && mv $(rc) $(rc).$(BACKUP); ))
+
+	$(foreach rc, $(TARGETS), $(call [ -f $(rc) -a ! -h $(rc) ] && mv $(rc) $(rc).$(BACKUP); ))
 
 u-bash: i-bash
 
