@@ -1,1 +1,3 @@
+source ~/.profile
+
 src "${XDG_CONFIG_HOME}/fzf/fzf.bash"
