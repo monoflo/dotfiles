@@ -1,11 +1,11 @@
 .PHONY: i install u update r remove
 export XDG_CONFIG_HOME = $(HOME)/.config
 
-INCLUDES := $(wildcard make.d/*)
-TARGETS  := $(notdir $(basename $(INCLUDES)))
+MAIN_INCLUDES := $(wildcard make.d/*/*)
+MAIN_TARGETS  := $(notdir $(basename $(MAIN_INCLUDES)))
 
-i install: $(addprefix i-, $(TARGETS))
-u update:  $(addprefix u-, $(TARGETS))
-r remove:  $(addprefix r-, $(TARGETS))
+i install: $(addprefix i-, $(MAIN_TARGETS))
+u update:  $(addprefix u-, $(MAIN_TARGETS))
+r remove:  $(addprefix r-, $(MAIN_TARGETS))
 
-$(foreach mk, $(INCLUDES), $(eval include $(mk)))
+$(foreach mk, $(MAIN_INCLUDES), $(eval include $(mk)))
