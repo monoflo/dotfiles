@@ -1,19 +1,18 @@
-.PHONY: i-fzf r-fzf u-fzf \
-				c_fzf
+.PHONY: i-fzf u-fzf r-fzf c_fzf
 
-FZF_DIR      := $(HOME)/.fzf
-FZF_REPO     := https://github.com/junegunn/fzf.git
+FZF_DIR  := $(HOME)/.fzf
+FZF_REPO := https://github.com/junegunn/fzf.git
+FZF_ARGS := --xdg --key-bindings --completion --no-update-rc
 
-ARGS_INSTALL := --xdg --key-bindings --completion --no-update-rc
 
 i-fzf: c_fzf
 ifeq (,$(wildcard $(XDG_CONFIG_HOME)/fzf))
-	$(FZF_DIR)/install $(ARGS_INSTALL)
+	$(FZF_DIR)/install $(FZF_ARGS)
 endif
 
 u-fzf: c_fzf
 	git -C $(FZF_DIR) pull
-	$(FZF_DIR)/install $(ARGS_INSTALL)
+	$(FZF_DIR)/install $(FZF_ARGS)
 
 r-fzf:
 ifneq (,$(wildcard $(FZF_DIR)))
@@ -21,6 +20,7 @@ ifneq (,$(wildcard $(FZF_DIR)))
 	rm -rf $(FZF_DIR)
 endif
 
+# helpers
 
 c_fzf:
 ifeq (,$(wildcard $(FZF_DIR)))

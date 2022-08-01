@@ -1,14 +1,14 @@
 .PHONY: i-dotfiles u-dotfiles r-dotfiles
 
-PACKAGE := dotfiles.d
-ARGS    := --dotfiles --no-folding -t "$(HOME)"
+DOTFILES_PKG  := dotfiles.d
+DOTFILES_ARGS := --dotfiles --no-folding -t "$(HOME)"
 
 i-dotfiles:
 	@mkdir -p $(XDG_CONFIG_HOME)
-	stow -S $(ARGS) $(PACKAGE)
+	stow -S $(DOTFILES_ARGS) $(DOTFILES_PKG)
 
 u-dotfiles:
-	stow -R $(ARGS) $(PACKAGE)
+	stow -R $(DOTFILES_ARGS) $(DOTFILES_PKG)
 
 r-dotfiles:
-	stow -D $(ARGS) $(PACKAGE)
+	stow -D $(DOTFILES_ARGS) $(DOTFILES_PKG)
