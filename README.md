@@ -1,13 +1,12 @@
 # dotfiles
 
-## Install
+## Prerequisites
 
 - Install GNU Stow
   - Debian: `apt install stow`
   - Fedora: `dnf install stow`
   - MacOS: `brew install stow`
-- Run `make install`
 
-## Uninstall
+## Usage
 
-- Run `make uninstall`
+`make [install|update|remove]`
