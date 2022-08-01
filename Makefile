@@ -1,13 +1,11 @@
 .PHONY: install update remove
 export XDG_CONFIG_HOME = $(HOME)/.config
 
+INCLUDES := $(wildcard make.d/*)
+TARGETS  := $(notdir $(basename $(INCLUDES)))
 
-install: i-dotfiles i-fzf
+install: $(addprefix i-, $(TARGETS))
+update:  $(addprefix u-, $(TARGETS))
+remove:  $(addprefix r-, $(TARGETS))
 
-update:  u-dotfiles u-fzf
-
-remove:  r-dotfiles r-fzf
-
-
-include make.d/dotfiles.mk
-include make.d/fzf.mk
+$(foreach mk, $(INCLUDES), $(eval include $(mk)))
