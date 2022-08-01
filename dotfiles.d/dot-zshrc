@@ -1,4 +1,4 @@
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+src "${XDG_CONFIG_HOME}/fzf/fzf.zsh"
 
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
