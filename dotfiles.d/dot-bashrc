@@ -1,3 +1,4 @@
 source ~/.profile
 
+src "/etc/bashrc"
 src "${XDG_CONFIG_HOME}/fzf/fzf.bash"
