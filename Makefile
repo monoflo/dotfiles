@@ -6,13 +6,13 @@ PACKAGE := dotfiles.d
 ARGS    := --dotfiles --no-folding -t "$(HOME)"
 
 
-install: fzf-install
+install: i-fzf
 	@mkdir -p $(XDG_CONFIG_HOME)
 	stow -S $(FLAGS) $(PACKAGE)
 
-update: fzf-update
+update: u-fzf
 
-uninstall: fzf-uninstall
+remove: r-fzf
 	stow -D $(FLAGS) $(PACKAGE)
 
 
