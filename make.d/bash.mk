@@ -1,6 +1,6 @@
 .PHONY: i-bash u-bash r-bash
 
-TARGETS := ~/.bash_login ~/.bash_profile
+TARGETS := ~/.bashrc ~/.bash_login ~/.bash_profile
 BACKUP  := bak
 
 i-bash:
