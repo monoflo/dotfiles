@@ -9,4 +9,4 @@
 
 ## Usage
 
-`make [install|update|remove]`
+`make [i|install|u|update|r|remove]`
