@@ -1,5 +1,5 @@
-src() { [[ -r "$1" ]] && source "$1"; }
-path() { [[ -d "$1" ]] && export PATH="$PATH:$1"; }
+src()  { [[ ! -r "$1" ]] && echo "src: \`$1\` not readable" 2>&1 || source "$1"; }
+path() { [[ ! -d "$1" ]] && echo "path: \`$1\` not a directory" 2>&1 || export PATH="$PATH:$1"; }
 
 export CARGO_HOME="$HOME/.cargo"
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
