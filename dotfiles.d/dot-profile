@@ -7,3 +7,5 @@ src "$CARGO_HOME/env"
 
 path "$HOME/.local/bin"
 path "$CARGO_HOME/bin"
+
+[ -n "$BASH_VERSION" ] && src "$HOME/.bashrc"
