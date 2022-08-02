@@ -1,16 +1,8 @@
 src()  { [ -r "$1" ] && source "$1"; }
 path() { [ -d "$1" ] && test "${PATH#*$1}" == "$PATH" && export PATH="$PATH:$1"; }
 
-export CARGO_HOME="$HOME/.cargo"
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
-export XDG_CONFIG_HOME="$HOME/.config"
+for rc in "$HOME"/.profile.d/*; do src "$rc"; done; unset rc
 
-alias c="cargo"
-alias g="git"
-alias v="nvim"
-alias vim="nvim"
-
-src "$HOME/.profile-secret"
 src "$CARGO_HOME/env"
 
 path "$HOME/.local/bin"
