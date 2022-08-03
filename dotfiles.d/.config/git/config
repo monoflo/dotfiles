@@ -18,6 +18,7 @@
     c    = commit
     ca   = commit --amend
     cb   = checkout --branch
+    cf   = commit --fixup=HEAD
     co   = checkout
     cl   = config --list
     d    = diff
