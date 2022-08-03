@@ -33,6 +33,7 @@
 
 [core]
     editor = nvim
+    hooksPath = "~/.config/git/hooks"  # no expansion in `git-config`, can't use $XDG_CONFIG_HOME
 
 [diff]
     tool = vimdiff

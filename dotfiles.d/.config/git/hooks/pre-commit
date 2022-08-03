@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+set -eu
+
+# rust
+for crate in $(git ls-tree -r --name-only HEAD | grep Cargo.toml | xargs dirname)
+do
+    pushd $crate > /dev/null
+
+    if ! cargo fmt -- --check
+    then
+        echo "error: \`cargo fmt\` failed for crate \"$crate\""
+        exit 1
+    fi
+
+    popd
+done
