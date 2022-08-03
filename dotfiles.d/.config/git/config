@@ -3,6 +3,8 @@
 
 
 [alias]
+    default-branch = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+
     a    = add
     b    = branch
     bd   = branch --delete
