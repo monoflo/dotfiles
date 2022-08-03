@@ -3,7 +3,10 @@
 
 
 [alias]
-    default-branch = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+    branch-default = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+    cod  = !git checkout $(git branch-default)
+    dd   = !git diff     $(git branch-default)..HEAD
+    ld   = !git log      $(git branch-default)..HEAD --oneline
 
     a    = add
     b    = branch
@@ -19,8 +22,7 @@
     dt   = difftool
     f    = fetch
     g    = log --all --decorate --oneline --graph
-    l    = !git log --oneline $(git default-branch)..HEAD
-    la   = log
+    l    = log
     last = log -1 HEAD --stat
     ls   = ls-tree -r --name-only HEAD
     p    = push origin HEAD
