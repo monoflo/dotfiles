@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+DIRS_CRATE=$(git ls-tree -r --name-only HEAD | grep Cargo.toml | xargs -r dirname)
+
+parallel '(cd {} && cargo fmt -- --check)' ::: $DIRS_CRATE
+# parallel '(cd {} && cargo clippy --all-targets -- -D warnings)' ::: $DIRS_CRATE
+# parallel '(cd {} && cargo test)' ::: $DIRS_CRATE
