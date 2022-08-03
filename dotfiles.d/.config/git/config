@@ -21,6 +21,7 @@
     g    = log --all --decorate --oneline --graph
     l    = log
     last = log -1 HEAD --stat
+    ls   = ls-tree -r --name-only HEAD
     p    = push origin HEAD
     pl   = pull
     ps   = push
