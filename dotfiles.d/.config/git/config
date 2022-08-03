@@ -19,7 +19,8 @@
     dt   = difftool
     f    = fetch
     g    = log --all --decorate --oneline --graph
-    l    = log
+    l    = !git log --oneline $(git default-branch)..HEAD
+    la   = log
     last = log -1 HEAD --stat
     ls   = ls-tree -r --name-only HEAD
     p    = push origin HEAD
