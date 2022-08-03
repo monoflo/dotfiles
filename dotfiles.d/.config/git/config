@@ -24,6 +24,7 @@
     ps   = push
     r    = remote --verbose
     ri   = rebase --interactive
+    root = rev-parse --show-toplevel
     s    = status
     u    = reset HEAD~1
 
