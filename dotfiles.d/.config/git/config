@@ -8,6 +8,9 @@
     dd   = !git diff     $(git branch-default)..HEAD
     ld   = !git log      $(git branch-default)..HEAD --oneline
 
+    branches-list = !git for-each-ref --format='%(refname:short)' refs/heads
+    cos  = "!select branch in $(git branches-list); do [ -n \"$branch\" ] && git checkout \"$branch\" && break; done"
+
     a    = add
     b    = branch
     bd   = branch --delete
