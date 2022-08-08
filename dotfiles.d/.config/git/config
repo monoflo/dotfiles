@@ -3,13 +3,24 @@
 
 
 [alias]
-    branch-default = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
-    cod  = !git checkout $(git branch-default)
-    dd   = !git diff     $(git branch-default)..HEAD
-    ld   = !git log      $(git branch-default)..HEAD --oneline
+    bdft = !git branch-default
+    branch-default =    "!f() { \
+                            b=\"$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')\"; \
+                            [ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; \
+                        }; f $@; unset f"
 
-    branches-list = !git for-each-ref --format='%(refname:short)' refs/heads
-    cos  = "!select branch in $(git branches-list); do [ -n \"$branch\" ] && git checkout \"$branch\" && break; done"
+    bsel = !git branch-select
+    branch-select =     "!f() { \
+                            select b in $(git rlsh); do if [ -n \"$b\" ]; then break; fi; done; \
+                            [ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; \
+                        }; f $@; unset f"
+
+    rls =  ! git refs-list
+    rlsh = ! git refs-list heads
+    rlsr = ! git refs-list remotes
+    refs-list =         "!f() { \
+                            git for-each-ref --format='%(refname:short)' \"refs/$1\"; \
+                        }; f $@; unset f"
 
     a    = add
     b    = branch
