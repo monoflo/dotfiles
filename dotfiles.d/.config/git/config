@@ -27,7 +27,7 @@
 
     rls =  refs-list
     rlsh = refs-list heads
-    rlsr = refs-list remotes
+    rlsr = "!git refs-list remotes | sed -E 's@^[^/]+/@@'"
     refs-list = \
     "!f() { " \
         "git for-each-ref --format='%(refname:short)' \"refs/$1\"; " \
