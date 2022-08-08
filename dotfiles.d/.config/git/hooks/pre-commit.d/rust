@@ -1,6 +1,16 @@
 #!/usr/bin/env sh
-DIRS_CRATE=$(git ls-tree -r --name-only HEAD | grep Cargo.toml | xargs -r dirname)
+PC_RUST_MANIFEST_DIRS=$(git ls-tree -r --name-only HEAD | grep Cargo.toml | parallel 'dirname {}')
+PC_RUST_COMMANDS=(
+    "cargo fmt -- --check"
+    #"cargo clippy --all-targets -- -D warnings"
+    #"cargo test"
+)
 
-parallel '(cd {} && cargo fmt -- --check)' ::: $DIRS_CRATE
-# parallel '(cd {} && cargo clippy --all-targets -- -D warnings)' ::: $DIRS_CRATE
-# parallel '(cd {} && cargo test)' ::: $DIRS_CRATE
+if [ -n "$PC_RUST_MANIFEST_DIRS" ]
+then
+    for cmd in "${PC_RUST_COMMANDS[@]}"
+    do
+        echo "$cmd"
+        parallel "(cd {} && $cmd)" ::: "$PC_RUST_MANIFEST_DIRS"
+    done
+fi
