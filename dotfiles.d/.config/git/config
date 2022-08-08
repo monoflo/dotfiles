@@ -36,6 +36,23 @@
     dir = show-toplevel
     show-toplevel = rev-parse --show-toplevel
 
+    wtmk = worktree-make
+    worktree-make = \
+    "!f() { " \
+        "[ \"$#\" -ne 1 ] && echo 2>&1 'usage: git worktree-make <basedir>' && exit 1;" \
+        "b=\"$(git bsel)\"; " \
+        "repo=\"$(basename $(git show-toplevel))\"; " \
+        "git worktree add \"$1/$repo\" \"$b\"; " \
+    "}; f $@; unset f"
+
+    wtsel = worktree-select
+    worktree-select = \
+    "!f() { " \
+        "select wt in $(git wtls | awk '{print $1}'); do if [ -n \"$wt\" ]; then break; fi; done; " \
+        "[ \"$#\" -gt 0 ] && git \"$@\" \"$wt\" || echo \"$wt\"; " \
+    "}; f $@; unset f"
+
+
     a    = add
     aa   = add --all
     ap   = add --edit
@@ -79,6 +96,11 @@
     ri   = rebase --interactive
 
     s    = status
+    wt    = worktree
+    wta   = worktree add
+    wtls  = worktree list
+    wtmv  = worktree move
+    wtrm  = worktree remove
 
 [branch]
     autosetuprebase = always
