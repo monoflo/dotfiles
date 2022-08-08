@@ -17,8 +17,8 @@
         "[ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; " \
     "}; f $@; unset f"
 
-    lcfg = list-config
-    list-config = \
+    cfgls = config-list
+    config-list = \
     "!f() { " \
         "git config --list | sort | " \
         "([ -n \"$1\" ] && grep \"$1\" || cat) " \
