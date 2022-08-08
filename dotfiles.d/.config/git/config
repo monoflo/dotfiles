@@ -28,11 +28,11 @@
 
     a    = add
     b    = branch
+    bc   = checkout --branch
     bd   = branch --delete
     bl   = branch --list
     c    = commit
     ca   = commit --amend
-    cb   = checkout --branch
     cf   = commit --fixup=HEAD
     co   = checkout
     d    = diff
