@@ -72,5 +72,8 @@
 [pull]
     rebase = true
 
+[rebase]
+    autosquash = true
+
 [status]
     short = true
