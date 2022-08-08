@@ -55,7 +55,7 @@
 
     a    = add
     aa   = add --all
-    ap   = add --edit
+    ae   = add --edit
     ap   = add --patch
     au   = add --update
 
@@ -64,17 +64,14 @@
     bd   = branch --delete
     bl   = branch --list
 
-    cl   = clone
-    cle  = clone --no-checkout
-
-    cm   = commit
-    cma  = commit --amend
-    cmf  = commit --fixup=HEAD
+    c    = commit
+    ca   = commit --amend
+    cf   = commit --fixup=HEAD
 
     co   = checkout
 
-    df   = diff
-    dfc  = diff --cached
+    d    = diff
+    dc   = diff --cached
     dt   = difftool
 
     f    = fetch
@@ -96,11 +93,12 @@
     ri   = rebase --interactive
 
     s    = status
-    wt    = worktree
-    wta   = worktree add
-    wtls  = worktree list
-    wtmv  = worktree move
-    wtrm  = worktree remove
+
+    wt   = worktree
+    wta  = worktree add
+    wtls = worktree list
+    wtmv = worktree move
+    wtrm = worktree remove
 
 [branch]
     autosetuprebase = always
