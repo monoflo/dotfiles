@@ -39,8 +39,9 @@
     dc   = diff --cached
     dt   = difftool
     f    = fetch
-    g    = log --all --decorate --oneline --graph
     l    = log
+    lg   = log --all --decorate --oneline --graph
+    lo   = log --oneline
     last = log -1 HEAD --stat
     ls   = ls-tree -r --name-only HEAD
     p    = push origin HEAD
