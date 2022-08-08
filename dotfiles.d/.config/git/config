@@ -13,7 +13,8 @@
     bsel = branch-select
     branch-select = \
     "!f() { " \
-        "select b in $(git rlsh); do if [ -n \"$b\" ]; then break; fi; done; " \
+        "opts=$(cat <(git rlsh) <(git rlsr) | tr ' ' '\n' | nl | sort -u -k2 | sort -n | cut -f2-); " \
+        "select b in $opts; do if [ -n \"$b\" ]; then break; fi; done; " \
         "[ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; " \
     "}; f $@; unset f"
 
