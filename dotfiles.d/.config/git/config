@@ -3,28 +3,37 @@
 
 
 [alias]
-    bdft = !git branch-default
-    branch-default =    "!f() { \
-                            b=\"$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')\"; \
-                            [ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; \
-                        }; f $@; unset f"
+    bdft = branch-default
+    branch-default = \
+    "!f() { " \
+        "b=\"$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')\"; " \
+        "[ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; " \
+    "}; f $@; unset f"
 
-    bsel = !git branch-select
-    branch-select =     "!f() { \
-                            select b in $(git rlsh); do if [ -n \"$b\" ]; then break; fi; done; \
-                            [ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; \
-                        }; f $@; unset f"
+    bsel = branch-select
+    branch-select = \
+    "!f() { " \
+        "select b in $(git rlsh); do if [ -n \"$b\" ]; then break; fi; done; " \
+        "[ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; " \
+    "}; f $@; unset f"
 
-    cfg =               "!f() { \
-                            git config --list | sort | grep \"${1-*}\"; \
-                        }; f $@; unset f"
+    lcfg = list-config
+    list-config = \
+    "!f() { " \
+        "git config --list | sort | " \
+        "([ -n \"$1\" ] && grep \"$1\" || cat) " \
+    "}; f $@; unset f"
 
-    rls =  ! git refs-list
-    rlsh = ! git refs-list heads
-    rlsr = ! git refs-list remotes
-    refs-list =         "!f() { \
-                            git for-each-ref --format='%(refname:short)' \"refs/$1\"; \
-                        }; f $@; unset f"
+    rls =  refs-list
+    rlsh = refs-list heads
+    rlsr = refs-list remotes
+    refs-list = \
+    "!f() { " \
+        "git for-each-ref --format='%(refname:short)' \"refs/$1\"; " \
+    "}; f $@; unset f"
+
+    dir = show-toplevel
+    show-toplevel = rev-parse --show-toplevel
 
     a    = add
     b    = branch
