@@ -28,7 +28,7 @@
 
     a    = add
     b    = branch
-    bc   = checkout --branch
+    bc   = checkout -b
     bd   = branch --delete
     bl   = branch --list
     c    = commit
