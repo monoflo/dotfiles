@@ -8,9 +8,5 @@ src "$CARGO_HOME/env"
 path "$HOME/.local/bin"
 path "$CARGO_HOME/bin"
 
-# test: is login shell?
-if [ "${-#*i}" == "$-" ]
-then
-    ([ -n "$BASH_VERSION" ] && src "$HOME/.bashrc") || \\
-    ([ -n "$ZSH_VERSION"  ] && src "$HOME/.zshrc" )
-fi
+([ -n "$BASH_VERSION" ] && src "$HOME/.bashrc") || \\
+([ -n "$ZSH_VERSION"  ] && src "$HOME/.zshrc" )

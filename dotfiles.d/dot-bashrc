@@ -1,8 +1,3 @@
-# test: is interactive shell?
-if [ "${-#*i}" != "$-" ]
-then
-    source "$HOME/.profile"
-fi
-
+! command -v src > /dev/null && source "$HOME/.profile"
 src "/etc/bashrc"
 src "${XDG_CONFIG_HOME}/fzf/fzf.bash"

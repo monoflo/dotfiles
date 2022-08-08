@@ -1,5 +1,4 @@
-# test: is interactive shell?
-if [ "${-#*i}" != "$-" ]
+if ! command -v src > /dev/null
 then
     emulate sh
     source "$HOME/.profile"
