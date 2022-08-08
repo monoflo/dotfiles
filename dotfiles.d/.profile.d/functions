@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+# clipv: `xclip` copy to clipboard
+clipc()
+{
+    xclip -selection clipboard -in
+}
+
+# clipv: `xclip` paste from clipboard
+clipv()
+{
+    xclip -selection clipboard -out
+}
+
+# terr: `tee` stdout to stderr
+terr()
+{
+    tee >(cat 1>&2)
+}
