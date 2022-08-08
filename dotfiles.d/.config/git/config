@@ -36,31 +36,48 @@
     show-toplevel = rev-parse --show-toplevel
 
     a    = add
+    aa   = add --all
+    ap   = add --edit
+    ap   = add --patch
+    au   = add --update
+
     b    = branch
     bc   = checkout -b
     bd   = branch --delete
     bl   = branch --list
-    c    = commit
-    ca   = commit --amend
-    cf   = commit --fixup=HEAD
+
+    cl   = clone
+    cle  = clone --no-checkout
+
+    cm   = commit
+    cma  = commit --amend
+    cmf  = commit --fixup=HEAD
+
     co   = checkout
-    d    = diff
-    dc   = diff --cached
+
+    df   = diff
+    dfc  = diff --cached
     dt   = difftool
+
     f    = fetch
+
     l    = log
     lg   = log --all --decorate --oneline --graph
     lo   = log --oneline
     last = log -1 HEAD --stat
+
     ls   = ls-tree -r --name-only HEAD
-    p    = push origin HEAD
+
     pl   = pull
-    ps   = push
-    r    = remote --verbose
+
+    ps   = push origin HEAD
+
+    reh  = reset --hard HEAD~1
+    res  = reset --soft HEAD~1
+
     ri   = rebase --interactive
-    root = rev-parse --show-toplevel
+
     s    = status
-    u    = reset HEAD~1
 
 [branch]
     autosetuprebase = always
