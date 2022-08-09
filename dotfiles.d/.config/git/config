@@ -94,6 +94,9 @@
 
     s    = status
 
+    sm   = submodule
+    smu  = submodule update --init --recursive
+
     wt   = worktree
     wta  = worktree add
     wtls = worktree list
