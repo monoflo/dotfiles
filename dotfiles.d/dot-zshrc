@@ -1,3 +1,4 @@
+#!/usr/bin/zsh
 if ! command -v src > /dev/null
 then
     emulate sh

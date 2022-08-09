@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 src()  { [ -r "$1" ] && source "$1"; }
 path() { [ -d "$1" ] && test "${PATH#*$1}" == "$PATH" && export PATH="$PATH:$1"; }
 

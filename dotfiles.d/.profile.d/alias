@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 alias c="cargo"
 alias g="git"
 alias v="nvim"
