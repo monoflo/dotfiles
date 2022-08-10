@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 alias c="cargo"
 alias g="git"
+alias rgi="rg --no-ignore"
 alias v="nvim"
 alias vim="nvim"
