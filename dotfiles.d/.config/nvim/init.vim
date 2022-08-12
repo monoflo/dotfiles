@@ -5,6 +5,10 @@ autocmd FileType c setlocal shiftwidth=2 tabstop=2
 autocmd FileType make setlocal noexpandtab shiftwidth=2 tabstop=2
 autocmd FileType tex setlocal shiftwidth=2 tabstop=2
 
+" auto re-source tmux config
+" see: https://waylonwalker.com/tmux-source-file/#from-vim
+autocmd bufwritepost tmux.conf execute ':!tmux source-file %'
+
 
 " vim-plug installation
 " see: https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
