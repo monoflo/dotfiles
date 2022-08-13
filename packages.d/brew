@@ -1,0 +1,14 @@
+automake
+ca-certificates
+fd
+git
+git-lfs
+iperf3
+neovim
+parallel
+pkg-config
+ripgrep
+shellcheck
+stow
+tmux
+tree
