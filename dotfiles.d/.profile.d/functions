@@ -4,8 +4,8 @@
 # source: https://unix.stackexchange.com/a/326270
 cgrep()
 {
-    local pattern="$1"
-    if [[ -z "$pattern" ]]
+    pattern="$1"
+    if [ -z "$pattern" ]
     then
         cat
         return
@@ -29,5 +29,5 @@ clipv()
 # terr: `tee` stdout to stderr
 terr()
 {
-    tee >(cat 1>&2)
+    tee /dev/fd/2
 }
