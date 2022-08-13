@@ -1,7 +1,9 @@
 #!/usr/bin/env sh
 set -eu
-for hook in "$(dirname $0)/pre-commit.d"/*
-do
-    source "$hook"
-done
-unset hook
+
+DIRNAME="$(dirname -- "$0")"
+
+# shellcheck source=dotfiles.d/.config/git/hooks/pre-commit.d/rust
+. "$DIRNAME/pre-commit.d/rust"
+
+unset DIRNAME

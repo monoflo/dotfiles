@@ -1,14 +1,14 @@
 #!/usr/bin/env sh
 PC_RUST_MANIFEST_DIRS=$(git ls-tree -r --name-only HEAD | grep Cargo.toml | parallel 'dirname {}')
-PC_RUST_COMMANDS=(
-    "cargo fmt -- --check"
-    #"cargo clippy --all-targets -- -D warnings"
-    #"cargo test"
-)
+
+set -- \
+    "cargo fmt -- --check" # \
+    # "cargo clippy --all-targets -- -D warnings" \
+    # "cargo test"
 
 if [ -n "$PC_RUST_MANIFEST_DIRS" ]
 then
-    for cmd in "${PC_RUST_COMMANDS[@]}"
+    for cmd in "$@"
     do
         echo "$cmd"
         parallel "(cd {} && $cmd)" ::: "$PC_RUST_MANIFEST_DIRS"
