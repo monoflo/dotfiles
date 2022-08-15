@@ -6,12 +6,12 @@ DNF_PACKAGES := packages.d/dnf
 
 
 i-dnf:
-	cat $(DNF_PACKAGES) | xargs sudo dnf install -y
+	cat $(DNF_PACKAGES) | xargs $(SUDO) dnf install -y
 
 u-dnf: i-dnf
-	sudo dnf update -y
+	$(SUDO) dnf update -y
 
 r-dnf:
-	cat $(DNF_PACKAGES) | xargs sudo dnf remove -y
+	cat $(DNF_PACKAGES) | xargs $(SUDO) dnf remove -y
 
 endif  # command -v dnf

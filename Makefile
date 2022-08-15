@@ -1,6 +1,12 @@
 .PHONY: i install u update r remove c check
 export XDG_CONFIG_HOME = $(HOME)/.config
 
+ifeq (0, $(shell id -u))
+SUDO :=
+else
+SUDO := sudo
+endif
+
 MAIN_INCLUDES  := $(wildcard make.d/*/*)
 MAIN_TARGETS   := $(notdir $(basename $(MAIN_INCLUDES)))
 

@@ -6,12 +6,12 @@ APT_PACKAGES := packages.d/apt
 
 
 i-apt:
-	cat $(APT_PACKAGES) | xargs sudo apt-get install -y
+	cat $(APT_PACKAGES) | xargs $(SUDO) apt-get install -y
 
 u-apt: i-apt
-	sudo apt-get update -y
+	$(SUDO) apt-get update -y
 
 r-apt:
-	cat $(APT_PACKAGES) | xargs sudo apt-get remove -y
+	cat $(APT_PACKAGES) | xargs $(SUDO) apt-get remove -y
 
 endif  # command -v apt-get
