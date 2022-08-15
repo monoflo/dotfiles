@@ -31,3 +31,30 @@ terr()
 {
     tee /dev/fd/2
 }
+
+# wssh: wait for `ssh`
+wssh()
+{
+    if [ $# -lt 1 ]
+    then
+        echo >&2 "usage: wssh <host> [args]"
+        return 1
+    fi
+
+    host="$1" && shift
+    port="$(ssh -G "$host" | grep -E "^port" | awk '{print $2}')"
+    attempt="1"
+    t_start="$(date +'%s')"
+
+    while ! nc -z "$host" "$port"
+    do
+        t_current="$(date +'%s')"
+        t_elapsed="$((t_current-t_start))"
+        echo >&2 "[$host:$port] attempt #$attempt; elapsed: $t_elapsed(s)"
+        attempt="$((attempt+1))"
+        sleep 1
+    done
+
+    # shellcheck disable=SC2029
+    ssh "$host" "$@"
+}
