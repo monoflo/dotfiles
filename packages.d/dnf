@@ -1,0 +1,16 @@
+automake
+bat
+ca-certificates
+dnf-utils
+fd-find
+git
+git-lfs
+git-subtree
+neovim
+parallel
+pkgconf
+ripgrep
+ShellCheck
+stow
+tree
+xclip
