@@ -1,9 +1,9 @@
 automake
 ca-certificates
-fd
+fd-find
+file
 git
 git-lfs
-git-subtree
 make
 parallel
 ripgrep
