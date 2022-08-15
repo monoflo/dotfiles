@@ -5,6 +5,7 @@ git
 git-lfs
 git-subtree
 iperf3
+make
 neovim
 parallel
 pkg-config

@@ -4,6 +4,7 @@ fd
 git
 git-lfs
 git-subtree
+make
 parallel
 ripgrep
 shellcheck

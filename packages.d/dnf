@@ -6,6 +6,7 @@ fd-find
 git
 git-lfs
 git-subtree
+make
 neovim
 parallel
 pkgconf
