@@ -13,7 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-      
+
+    - name: Install make
+      run: apt-get update && apt-get install make
+
     - name: Run make
       run: make
       
