@@ -1,0 +1,12 @@
+automake
+ca-certificates
+fd
+git
+git-lfs
+git-subtree
+parallel
+ripgrep
+shellcheck
+stow
+tmux
+tree
