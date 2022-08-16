@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 # shellcheck source=/dev/null
 src()  { [ -r "$1" ] && . "$1"; }
-path() { [ -d "$1" ] && test "${PATH#*"$1"}" == "$PATH" && export PATH="$PATH:$1"; }
+path() { [ -d "$1" ] && test "${PATH#*"$1"}" == "$PATH" && export PATH="${PATH:+${PATH}:}$1"; }
 
 for rc in "$HOME"/.profile.d/*; do src "$rc"; done; unset rc
 
