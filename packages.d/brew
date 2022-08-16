@@ -9,6 +9,7 @@ make
 neovim
 parallel
 pkg-config
+ranger
 ripgrep
 shellcheck
 stow
