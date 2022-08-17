@@ -3,7 +3,6 @@ ca-certificates
 fd
 git
 git-lfs
-git-subtree
 iperf3
 make
 neovim
