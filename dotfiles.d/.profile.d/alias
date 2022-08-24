@@ -2,7 +2,6 @@
 alias c="cargo"
 alias cm="cargo make"
 alias g="git"
+alias nv="nvim"
 alias r=". ranger"
 alias rgi="rg --no-ignore"
-alias v="nvim"
-alias vim="nvim"
