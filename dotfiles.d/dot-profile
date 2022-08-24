@@ -3,7 +3,14 @@
 src()  { [ -f "$1" -a -r "$1" ] && . "$1"; }
 path() { [ -d "$1" ] && test "${PATH#*"$1"}" == "$PATH" && export PATH="$PATH:$1"; }
 
-for rc in "$HOME"/.profile.d/*; do src "$rc"; done; unset rc
+shopt -q globstar
+globstar_en="$?"
+shopt -s globstar
+
+for rc in "$HOME"/.profile.d/**/*; do src "$rc"; done; unset rc
+
+[ "$globstar_en" -eq 0 ] && shopt -s globstar || shopt -u globstar
+unset globstar_en
 
 src "$CARGO_HOME/env"
 
