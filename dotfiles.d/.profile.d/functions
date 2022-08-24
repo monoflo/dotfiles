@@ -42,17 +42,27 @@ wssh()
     fi
 
     alias="$1" && shift
-    host="$(ssh -G "$alias" | grep -E "^hostname" | awk '{print $2}')"
-    port="$(ssh -G "$alias" | grep -E "^port"     | awk '{print $2}')"
-    retries="0"
+    host="$(ssh -G "$alias"  | grep -E "^hostname"  | awk '{print $2}')"
+    port="$(ssh -G "$alias"  | grep -E "^port"      | awk '{print $2}')"
+    proxy="$(ssh -G "$alias" | grep -E "^proxyjump" | awk '{print $2}')"
+    attempts="1"
     t_start="$(date +'%s')"
 
-    while ! nc -z "$host" "$port"
+    while true
     do
+        if [ -n "$proxy" ]
+        then
+            ssh "$proxy" "nc -z $host $port"
+        else
+            nc -z "$host" "$port"
+        fi
+
+        [ $? -eq 0 ] && break
+
         t_current="$(date +'%s')"
         t_elapsed="$((t_current-t_start))"
-        echo >&2 "{\"host\": \"$alias\", \"retries\": $retries, \"elapsed_sec\": $t_elapsed}"
-        retries="$((retries+1))"
+        echo >&2 "{\"host\": \"$alias\", \"attempts\": $attempts, \"elapsed\": $t_elapsed}"
+        attempts="$((attempts+1))"
         sleep 1
     done
 
