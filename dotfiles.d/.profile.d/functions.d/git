@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+git_clone_github()
+{
+    [ $# -lt 2 ] && echo >&2 "usage: git_clone_github <namespace> <repository> [<options>]" && return 1
+    namespace="$1" && shift
+    repository="$1" && shift
+    git clone "$@" "git@github.com:${namespace}/${repository}.git"
+}
