@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 alias c="cargo"
 alias cm="cargo make"
+alias e="$EDITOR"
+alias edit="$EDITOR"
 alias g="git"
-alias nv="nvim"
 alias r=". ranger"
 alias rgi="rg --no-ignore"
