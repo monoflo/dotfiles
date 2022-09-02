@@ -3,14 +3,12 @@
 
 
 [alias]
-    bdft = branch-default
     branch-default = \
     "!f() { " \
         "b=\"$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')\"; " \
         "[ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; " \
     "}; f $@; unset f"
 
-    bsel = branch-select
     branch-select = \
     "!f() { " \
         "opts=$(cat <(git rlsh) <(git rlsr) | tr ' ' '\n' | nl | sort -u -k2 | sort -n | cut -f2-); " \
@@ -18,25 +16,17 @@
         "[ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; " \
     "}; f $@; unset f"
 
-    cfgls = config-list
     config-list = \
     "!f() { " \
         "git config --list | sort | " \
         "([ -n \"$1\" ] && grep \"$1\" || cat) " \
     "}; f $@; unset f"
 
-    rls =  refs-list
-    rlsh = refs-list heads
-    rlsr = "!git refs-list remotes | sed -E 's@^[^/]+/@@'"
     refs-list = \
     "!f() { " \
         "git for-each-ref --format='%(refname:short)' \"refs/$1\"; " \
     "}; f $@; unset f"
 
-    dir = show-toplevel
-    show-toplevel = rev-parse --show-toplevel
-
-    wtmk = worktree-make
     worktree-make = \
     "!f() { " \
         "[ \"$#\" -ne 1 ] && echo 2>&1 'usage: git worktree-make <basedir>' && exit 1;" \
@@ -45,63 +35,77 @@
         "git worktree add \"$1/$repo\" \"$b\"; " \
     "}; f $@; unset f"
 
-    wtsel = worktree-select
     worktree-select = \
     "!f() { " \
         "select wt in $(git wtls | awk '{print $1}'); do if [ -n \"$wt\" ]; then break; fi; done; " \
         "[ \"$#\" -gt 0 ] && git \"$@\" \"$wt\" || echo \"$wt\"; " \
     "}; f $@; unset f"
 
+    a     = add
+    aa    = add --all
+    ae    = add --edit
+    ap    = add --patch
+    au    = add --update
 
-    a    = add
-    aa   = add --all
-    ae   = add --edit
-    ap   = add --patch
-    au   = add --update
+    b     = branch
+    bc    = checkout -b
+    bdef  = branch-default
+    bd    = branch --delete
+    bsel  = branch-select
+    bl    = branch --list
 
-    b    = branch
-    bc   = checkout -b
-    bd   = branch --delete
-    bl   = branch --list
+    c     = commit
+    ca    = commit --amend
+    cf    = commit --fixup=HEAD
 
-    c    = commit
-    ca   = commit --amend
-    cf   = commit --fixup=HEAD
+    cfgls = config-list
 
-    co   = checkout
+    co    = checkout
 
-    d    = diff
-    dc   = diff --cached
-    dt   = difftool
+    d     = diff
+    dc    = diff --cached
+    ddef  = !"git diff $(git bdef)..HEAD"
+    dt    = difftool
 
-    f    = fetch
+    dir   = show-toplevel
 
-    l    = log
-    lg   = log --all --decorate --oneline --graph
-    lo   = log --oneline
-    last = log -1 HEAD --stat
+    f     = fetch
 
-    ls   = ls-tree -r --name-only HEAD
+    l     = log
+    ldef  = !"git log --oneline $(git bdef)..HEAD"
+    lg    = log --all --decorate --oneline --graph
+    lo    = log --oneline
+    last  = log -1 HEAD --stat
 
-    pl   = pull
+    ls    = ls-tree -r --name-only HEAD
 
-    ps   = push origin HEAD
+    pl    = pull
 
-    reh  = reset --hard HEAD~1
-    res  = reset --soft HEAD~1
+    ps    = push origin HEAD
 
-    ri   = rebase --interactive
+    reh   = reset --hard HEAD~1
+    res   = reset --soft HEAD~1
 
-    s    = status
+    ri    = rebase --interactive
 
-    sm   = submodule
-    smu  = submodule update --init --recursive
+    rls   = refs-list
+    rlsh  = refs-list heads
+    rlsr  = "!git refs-list remotes | sed -E 's@^[^/]+/@@'"
 
-    wt   = worktree
-    wta  = worktree add
-    wtls = worktree list
-    wtmv = worktree move
-    wtrm = worktree remove
+    s     = status
+
+    show-toplevel = rev-parse --show-toplevel
+
+    sm    = submodule
+    smu   = submodule update --init --recursive
+
+    wt    = worktree
+    wta   = worktree add
+    wtls  = worktree list
+    wtmk  = worktree-make
+    wtmv  = worktree move
+    wtrm  = worktree remove
+    wtsel = worktree-select
 
 [branch]
     autosetuprebase = always
