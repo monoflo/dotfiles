@@ -1,0 +1,148 @@
+[include]
+    path = private  # private / sensitive config settings
+
+
+[alias]
+    branch-default = \
+    "!f() { " \
+        "b=\"$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')\"; " \
+        "[ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; " \
+    "}; f $@; unset f"
+
+    branch-select = \
+    "!f() { " \
+        "opts=$(cat <(git rlsh) <(git rlsr) | tr ' ' '\n' | nl | sort -u -k2 | sort -n | cut -f2-); " \
+        "select b in $opts; do if [ -n \"$b\" ]; then break; fi; done; " \
+        "[ \"$#\" -gt 0 ] && git \"$@\" \"$b\" || echo \"$b\"; " \
+    "}; f $@; unset f"
+
+    config-list = \
+    "!f() { " \
+        "git config --list | sort | " \
+        "([ -n \"$1\" ] && grep \"$1\" || cat) " \
+    "}; f $@; unset f"
+
+    refs-list = \
+    "!f() { " \
+        "git for-each-ref --format='%(refname:short)' \"refs/$1\"; " \
+    "}; f $@; unset f"
+
+    worktree-make = \
+    "!f() { " \
+        "[ \"$#\" -ne 1 ] && echo 2>&1 'usage: git worktree-make <basedir>' && exit 1;" \
+        "b=\"$(git bsel)\"; " \
+        "repo=\"$(basename $(git show-toplevel))\"; " \
+        "git worktree add \"$1/$repo\" \"$b\"; " \
+    "}; f $@; unset f"
+
+    worktree-select = \
+    "!f() { " \
+        "select wt in $(git wtls | awk '{print $1}'); do if [ -n \"$wt\" ]; then break; fi; done; " \
+        "[ \"$#\" -gt 0 ] && git \"$@\" \"$wt\" || echo \"$wt\"; " \
+    "}; f $@; unset f"
+
+    a     = add
+    aa    = add --all
+    ae    = add --edit
+    ap    = add --patch
+    au    = add --update
+
+    b     = branch
+    bc    = checkout -b
+    bdef  = branch-default
+    bd    = branch --delete
+    bsel  = branch-select
+    bl    = branch --list
+
+    c     = commit
+    ca    = commit --amend
+    cf    = commit --fixup=HEAD
+
+    cfgls = config-list
+
+    co    = checkout
+
+    d     = diff
+    dc    = diff --cached
+    ddef  = !"git diff $(git bdef)..HEAD"
+    dt    = difftool
+
+    dir   = show-toplevel
+
+    f     = fetch
+
+    l     = log
+    ldef  = !"git log --oneline $(git bdef)..HEAD"
+    lg    = log --all --decorate --oneline --graph
+    lo    = log --oneline
+    last  = log -1 HEAD --stat
+
+    ls    = ls-tree -r --name-only HEAD
+
+    pl    = pull
+
+    ps    = push origin HEAD
+
+    reh   = reset --hard HEAD~1
+    res   = reset --soft HEAD~1
+
+    ri    = rebase --interactive
+
+    rls   = refs-list
+    rlsh  = refs-list heads
+    rlsr  = "!git refs-list remotes | sed -E 's@^[^/]+/@@'"
+
+    s     = status
+
+    show-toplevel = rev-parse --show-toplevel
+
+    sm    = submodule
+    smu   = submodule update --init --recursive
+
+    wt    = worktree
+    wta   = worktree add
+    wtls  = worktree list
+    wtmk  = worktree-make
+    wtmv  = worktree move
+    wtrm  = worktree remove
+    wtsel = worktree-select
+
+[branch]
+    autosetuprebase = always
+
+[core]
+    editor = nvim
+    hooksPath = "~/.config/git/hooks"  # no expansion in `git-config`, can't use $XDG_CONFIG_HOME
+
+[diff]
+    tool = vimdiff
+
+[difftool]
+    prompt = false
+
+[fetch]
+    prune = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[help]
+    autocorrect = 20
+
+[init]
+    defaultBranch = main  # comply with GitHub.com
+
+[merge]
+    tool = vimdiff
+
+[pull]
+    rebase = true
+
+[rebase]
+    autosquash = true
+
+[status]
+    short = true

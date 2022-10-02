@@ -1,0 +1,78 @@
+#!/usr/bin/env sh
+
+# cgrep: chained `grep`
+# source: https://unix.stackexchange.com/a/326270
+cgrep()
+{
+    pattern="$1"
+    if [ -z "$pattern" ]
+    then
+        cat
+        return
+    fi
+    shift
+    grep -- "$pattern" | cgrep "$@"
+}
+
+# clipv: `xclip` copy to clipboard
+clipc()
+{
+    xclip -selection clipboard -in
+}
+
+# clipv: `xclip` paste from clipboard
+clipv()
+{
+    xclip -selection clipboard -out
+}
+
+# make_targets: list `make` targets
+# https://unix.stackexchange.com/a/230050
+make_targets()
+{
+    make -qp | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split($1,A,/ /);for(i in A)print A[i]}' | sort -u
+}
+
+# terr: `tee` stdout to stderr
+terr()
+{
+    tee /dev/fd/2
+}
+
+# wssh: wait for `ssh`
+wssh()
+{
+    if [ $# -lt 1 ]
+    then
+        echo >&2 "usage: wssh <host> [args]"
+        return 1
+    fi
+
+    alias="$1" && shift
+    host="$(ssh -G "$alias"  | grep -E "^hostname"  | awk '{print $2}')"
+    port="$(ssh -G "$alias"  | grep -E "^port"      | awk '{print $2}')"
+    proxy="$(ssh -G "$alias" | grep -E "^proxyjump" | awk '{print $2}')"
+    attempts="1"
+    t_start="$(date +'%s')"
+
+    while true
+    do
+        if [ -n "$proxy" ]
+        then
+            ssh "$proxy" "nc -z $host $port"
+        else
+            nc -z "$host" "$port"
+        fi
+
+        [ $? -eq 0 ] && break
+
+        t_current="$(date +'%s')"
+        t_elapsed="$((t_current-t_start))"
+        echo >&2 "{\"host\": \"$alias\", \"attempts\": $attempts, \"elapsed\": $t_elapsed}"
+        attempts="$((attempts+1))"
+        sleep 1
+    done
+
+    # shellcheck disable=SC2029
+    ssh "$alias" "$@"
+}

@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+set -eu
+
+DIRNAME="$(dirname -- "$0")"
+
+# shellcheck source=dotfiles.d/.config/git/hooks/pre-commit.d/rust
+. "$DIRNAME/pre-commit.d/rust"
+
+unset DIRNAME

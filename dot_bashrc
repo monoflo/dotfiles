@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+# shellcheck source=dotfiles.d/dot-profile
+! command -v src > /dev/null && source "$HOME/.profile"
+src "/etc/bashrc"
+src "${XDG_CONFIG_HOME}/fzf/fzf.bash"
