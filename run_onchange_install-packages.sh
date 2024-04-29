@@ -1,8 +1,13 @@
-#!/usr/bin/env sh
-sudo apt install << EOF
-  build-essential
-  curl
-  git
-  neovim
-  tree
-EOF
+#!/usr/bin/env bash
+pkgs=(
+# development
+    build-essential
+    git
+
+# utilities
+    curl
+    neovim
+    tree
+)
+
+sudo apt install ${pkgs[*]}
